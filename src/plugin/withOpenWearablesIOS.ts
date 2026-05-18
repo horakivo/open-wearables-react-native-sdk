@@ -31,12 +31,27 @@ const withOpenWearablesIOS: ConfigPlugin<OpenWearablesIOSPluginProps> = (
     config.modResults["NSHealthShareUsageDescription"] = healthShareUsage;
     config.modResults["NSHealthUpdateUsageDescription"] = healthUpdateUsage;
 
-    config.modResults["UIBackgroundModes"] = ["fetch", "processing"];
+    // Merge instead of replace so consumer-set modes (e.g. "remote-notification"
+    // for push) survive when this plugin runs.
+    const existingBackgroundModes =
+      (config.modResults["UIBackgroundModes"] as string[] | undefined) ?? [];
 
-    config.modResults["BGTaskSchedulerPermittedIdentifiers"] = [
-      "com.openwearables.healthsdk.task.refresh",
-      "com.openwearables.healthsdk.task.process",
-    ];
+    config.modResults["UIBackgroundModes"] = Array.from(
+      new Set([...existingBackgroundModes, "fetch", "processing"])
+    );
+
+    const existingBGTaskIdentifiers =
+      (config.modResults["BGTaskSchedulerPermittedIdentifiers"] as
+        | string[]
+        | undefined) ?? [];
+
+    config.modResults["BGTaskSchedulerPermittedIdentifiers"] = Array.from(
+      new Set([
+        ...existingBGTaskIdentifiers,
+        "com.openwearables.healthsdk.task.refresh",
+        "com.openwearables.healthsdk.task.process",
+      ])
+    );
 
     return config;
   });
