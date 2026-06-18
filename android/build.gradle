@@ -24,5 +24,5 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.horakivo.open_wearables_android_sdk:sdk:3793ef3cee")
+    implementation("com.github.horakivo.open_wearables_android_sdk:sdk:9bf432a6db")
 }
