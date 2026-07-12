@@ -142,9 +142,14 @@ public class OpenWearablesModule : Module() {
       OpenWearablesHealthSDK.getInstance().setProvider(providerId)
     }
     
-    // MARK: - Logs (not implemented in Android SDK)
-    Function("setLogLevel") {  }
+    // MARK: - Logs
+    Function("setLogLevel") { levelId: Int ->
+      OpenWearablesHealthSDK.getInstance().logLevel =
+        OWLogLevel.values().getOrElse(levelId) { OWLogLevel.ALWAYS }
+    }
 
-    Function("getLogLevel") {  }
+    Function("getLogLevel") {
+      OpenWearablesHealthSDK.getInstance().logLevel.ordinal
+    }
   }
 }
