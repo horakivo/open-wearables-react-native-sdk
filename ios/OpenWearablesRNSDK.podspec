@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
   s.static_framework = true
 
   s.dependency 'ExpoModulesCore'
-  s.dependency 'OLHealthKitSDK', '0.13.4'
+  s.dependency 'OLHealthKitSDK', '0.14.0'
 
   # Swift/Objective-C compatibility
   s.pod_target_xcconfig = {
