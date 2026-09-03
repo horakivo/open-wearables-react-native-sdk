@@ -250,7 +250,7 @@ authSub.remove();
 The following health data type identifiers can be passed to `requestAuthorization`:
 
 **Activity & Mobility**
-`steps`, `distanceWalkingRunning`, `distanceCycling`, `flightsClimbed`, `walkingSpeed`, `walkingStepLength`, `walkingAsymmetryPercentage`, `walkingDoubleSupportPercentage`, `sixMinuteWalkTestDistance`, `activeEnergy`, `basalEnergy`
+`steps`, `distanceWalkingRunning`, `distanceCycling` (iOS), `distanceSwimming` (iOS), `flightsClimbed`, `elevationGained` (Android), `walkingSpeed`, `walkingStepLength`, `walkingAsymmetryPercentage`, `walkingDoubleSupportPercentage`, `sixMinuteWalkTestDistance`, `activeEnergy`, `basalEnergy`, `totalEnergy` (Android), `swimmingStrokeCount` (iOS), `speed` (Android), `runningSpeed` (iOS 16+), `cyclingSpeed` (iOS 17+), `power` (Android), `runningPower` (iOS 16+), `cyclingPower` (iOS 17+), `stepsCadence` (Android), `cyclingCadence`
 
 **Heart & Cardiovascular**
 `heartRate`, `restingHeartRate`, `heartRateVariabilitySDNN`, `vo2Max`, `oxygenSaturation`, `respiratoryRate`

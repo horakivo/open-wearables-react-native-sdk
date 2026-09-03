@@ -23,6 +23,7 @@ export enum HealthDataType {
   Steps = "steps",
   DistanceWalkingRunning = "distanceWalkingRunning",
   DistanceCycling = "distanceCycling",
+  DistanceSwimming = "distanceSwimming",
   FlightsClimbed = "flightsClimbed",
   WalkingSpeed = "walkingSpeed",
   WalkingStepLength = "walkingStepLength",
@@ -31,6 +32,20 @@ export enum HealthDataType {
   SixMinuteWalkTestDistance = "sixMinuteWalkTestDistance",
   ActiveEnergy = "activeEnergy",
   BasalEnergy = "basalEnergy",
+
+  // Workout samples. Each platform reads the ids it has a record type for and ignores the
+  // rest: HealthKit has sport-specific speed/power, Health Connect has generic ones.
+  TotalEnergy = "totalEnergy", // Android
+  ElevationGained = "elevationGained", // Android
+  SwimmingStrokeCount = "swimmingStrokeCount", // iOS
+  Speed = "speed", // Android
+  RunningSpeed = "runningSpeed", // iOS 16+
+  CyclingSpeed = "cyclingSpeed", // iOS 17+
+  Power = "power", // Android
+  RunningPower = "runningPower", // iOS 16+
+  CyclingPower = "cyclingPower", // iOS 17+
+  StepsCadence = "stepsCadence", // Android
+  CyclingCadence = "cyclingCadence", // both
 
   // Heart & Cardiovascular
   HeartRate = "heartRate",
