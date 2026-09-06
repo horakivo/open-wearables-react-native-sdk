@@ -63,6 +63,10 @@ export enum HealthDataType {
   LeanBodyMass = "leanBodyMass",
   WaistCircumference = "waistCircumference",
   BodyTemperature = "bodyTemperature",
+  /** Nightly wrist temperature (iOS 16+, Apple Watch Series 8+). Absolute °C. */
+  AppleSleepingWristTemperature = "appleSleepingWristTemperature", // iOS
+  /** Nightly skin temperature as a delta from the device baseline, °C. */
+  SkinTemperature = "skinTemperature", // Android
 
   // Blood & Metabolic
   BloodGlucose = "bloodGlucose",
