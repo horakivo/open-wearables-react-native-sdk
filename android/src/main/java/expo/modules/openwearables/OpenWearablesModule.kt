@@ -3,6 +3,8 @@ package expo.modules.openwearables
 import expo.modules.kotlin.modules.Module
 import expo.modules.kotlin.modules.ModuleDefinition
 import expo.modules.kotlin.functions.Coroutine
+import expo.modules.kotlin.records.Field
+import expo.modules.kotlin.records.Record
 import com.openwearables.health.sdk.*
 
 public class OpenWearablesModule : Module() {
@@ -57,6 +59,17 @@ public class OpenWearablesModule : Module() {
     }
 
     // MARK: - Configure
+    Function("configureEndpoints") { endpoints: EndpointsRecord ->
+      OpenWearablesHealthSDK.getInstance().configure(
+        Endpoints(
+          sync = endpoints.sync,
+          logs = endpoints.logs,
+          tokenRefresh = endpoints.tokenRefresh,
+          disconnect = endpoints.disconnect,
+        )
+      )
+    }
+
     Function("configure") { host: String, customSyncURL: String? ->
       OpenWearablesHealthSDK.getInstance().configure(host, customSyncURL)
     }
@@ -152,4 +165,10 @@ public class OpenWearablesModule : Module() {
       OpenWearablesHealthSDK.getInstance().logLevel.ordinal
     }
   }
+}
+class EndpointsRecord : Record {
+  @Field val sync: String = ""
+  @Field val logs: String = ""
+  @Field val tokenRefresh: String? = null
+  @Field val disconnect: String? = null
 }

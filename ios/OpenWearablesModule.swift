@@ -28,6 +28,15 @@ public class OpenWearablesModule: Module {
         Function("configure") { (host: String, customSyncURL: String?) in
             OpenWearablesHealthSDK.shared.configure(host: host)
         }
+
+        Function("configureEndpoints") { (endpoints: EndpointsRecord) in
+            OpenWearablesHealthSDK.shared.configure(endpoints: .init(
+                sync: endpoints.sync,
+                logs: endpoints.logs,
+                tokenRefresh: endpoints.tokenRefresh,
+                disconnect: endpoints.disconnect
+            ))
+        }
         
         // MARK: - Auth        
         AsyncFunction("signIn") { (
@@ -131,4 +140,10 @@ public class OpenWearablesModule: Module {
             return OpenWearablesHealthSDK.shared.logLevel.rawValue
         }
     }
+}
+struct EndpointsRecord: Record {
+    @Field var sync: String = ""
+    @Field var logs: String = ""
+    @Field var tokenRefresh: String? = nil
+    @Field var disconnect: String? = nil
 }

@@ -138,9 +138,20 @@ await OpenWearablesHealthSDK.syncNow();
 
 ### Configuration
 
+#### `configureEndpoints(endpoints: Endpoints): void`
+
+Sets the exact URLs the SDK talks to: `sync`, `logs`, and optionally `tokenRefresh` and `disconnect`. `{user_id}` is replaced with the signed-in user's id; the SDK appends no path of its own.
+
+```ts
+OpenWearablesHealthSDK.configureEndpoints({
+  sync: "https://api.example.com/sync/sdk/users/{user_id}/sync",
+  logs: "https://api.example.com/sync/sdk/users/{user_id}/logs",
+});
+```
+
 #### `configure(host: string): void`
 
-Sets the backend host URL for the SDK.
+Sets the backend host URL for the SDK; requests go to `{host}/api/v1/...`.
 
 ---
 
