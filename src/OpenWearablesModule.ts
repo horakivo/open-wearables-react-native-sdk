@@ -1,5 +1,6 @@
 import { NativeModule, requireNativeModule } from "expo-modules-core";
 import {
+  Endpoints,
   HealthDataType,
   OpenWearablesModuleEvents,
   HealthDataProvider,
@@ -8,7 +9,8 @@ import {
 
 declare class OpenWearablesModule extends NativeModule<OpenWearablesModuleEvents> {
   // MARK: - Configure
-  configure(host: string, customSyncURL?: string): void;
+  /** Throws when an endpoint is not an absolute http(s) URL. */
+  configure(endpoints: Endpoints): void;
 
   // MARK: - Auth
   signIn(

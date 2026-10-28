@@ -46,8 +46,13 @@ export default function App() {
       const stored = OpenWearablesHealthSDK.getStoredCredentials();
       setCredentials(stored ?? {});
 
-      if (stored?.host) {
-        OpenWearablesHealthSDK.configure(stored.host);
+      if (stored?.syncURL && stored?.logsURL) {
+        OpenWearablesHealthSDK.configure({
+          sync: stored.syncURL,
+          logs: stored.logsURL,
+          tokenRefresh: stored.tokenRefreshURL ?? undefined,
+          disconnect: stored.disconnectURL ?? undefined,
+        });
       }
 
       const valid = Boolean(OpenWearablesHealthSDK.isSessionValid());

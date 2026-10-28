@@ -105,3 +105,17 @@ export type HealthDataProvider = {
   displayName: string;
   isAvailable: boolean;
 };
+
+/**
+ * Where the SDK sends each request. Every URL is absolute and used as is, except
+ * that `{user_id}` is replaced with the signed-in user's id (and, on Android,
+ * `{provider}` in `disconnect`). Without `tokenRefresh` the SDK does not refresh
+ * tokens (sign in with an API key); without `disconnect` sign-out skips the
+ * server-side disconnect.
+ */
+export type Endpoints = {
+  sync: string;
+  logs: string;
+  tokenRefresh?: string;
+  disconnect?: string;
+};
