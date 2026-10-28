@@ -25,12 +25,8 @@ public class OpenWearablesModule: Module {
         }
         
         // MARK: - Configure        
-        Function("configure") { (host: String, customSyncURL: String?) in
-            OpenWearablesHealthSDK.shared.configure(host: host)
-        }
-
-        Function("configureEndpoints") { (endpoints: EndpointsRecord) in
-            OpenWearablesHealthSDK.shared.configure(endpoints: .init(
+        Function("configure") { (endpoints: EndpointsRecord) in
+            try OpenWearablesHealthSDK.shared.configure(endpoints: .init(
                 sync: endpoints.sync,
                 logs: endpoints.logs,
                 tokenRefresh: endpoints.tokenRefresh,

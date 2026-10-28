@@ -111,8 +111,11 @@ See the example project:
 ```ts
 import OpenWearablesHealthSDK from "open-wearables";
 
-// Configure the SDK with your backend host
-OpenWearablesHealthSDK.configure("https://your-api-host.com");
+// Configure the SDK with every URL it calls
+OpenWearablesHealthSDK.configure({
+  sync: "https://your-api-host.com/api/v1/sdk/users/{user_id}/sync",
+  logs: "https://your-api-host.com/api/v1/sdk/users/{user_id}/logs",
+});
 
 // Sign in (token-based)
 OpenWearablesHealthSDK.signIn(userId, accessToken, refreshToken, null);
@@ -138,20 +141,16 @@ await OpenWearablesHealthSDK.syncNow();
 
 ### Configuration
 
-#### `configureEndpoints(endpoints: Endpoints): void`
+#### `configure(endpoints: Endpoints): void`
 
-Sets the exact URLs the SDK talks to: `sync`, `logs`, and optionally `tokenRefresh` and `disconnect`. `{user_id}` is replaced with the signed-in user's id; the SDK appends no path of its own.
+Sets the exact URLs the SDK talks to: `sync`, `logs`, and optionally `tokenRefresh` and `disconnect`. `{user_id}` is replaced with the signed-in user's id (and, on Android, `{provider}` in `disconnect`); the SDK appends no path of its own. Without `tokenRefresh` the SDK does not refresh tokens (API-key sign-in); without `disconnect` sign-out skips the server-side disconnect. Throws when an endpoint is not an absolute http(s) URL.
 
 ```ts
-OpenWearablesHealthSDK.configureEndpoints({
+OpenWearablesHealthSDK.configure({
   sync: "https://api.example.com/sync/sdk/users/{user_id}/sync",
   logs: "https://api.example.com/sync/sdk/users/{user_id}/logs",
 });
 ```
-
-#### `configure(host: string): void`
-
-Sets the backend host URL for the SDK; requests go to `{host}/api/v1/...`.
 
 ---
 

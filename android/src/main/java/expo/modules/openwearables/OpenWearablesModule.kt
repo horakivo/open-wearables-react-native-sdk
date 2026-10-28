@@ -59,7 +59,7 @@ public class OpenWearablesModule : Module() {
     }
 
     // MARK: - Configure
-    Function("configureEndpoints") { endpoints: EndpointsRecord ->
+    Function("configure") { endpoints: EndpointsRecord ->
       OpenWearablesHealthSDK.getInstance().configure(
         Endpoints(
           sync = endpoints.sync,
@@ -68,10 +68,6 @@ public class OpenWearablesModule : Module() {
           disconnect = endpoints.disconnect,
         )
       )
-    }
-
-    Function("configure") { host: String, customSyncURL: String? ->
-      OpenWearablesHealthSDK.getInstance().configure(host, customSyncURL)
     }
 
     // MARK: - Auth

@@ -3,6 +3,7 @@ import OpenWearablesHealthSDK from "open-wearables";
 import { useEffect, useState } from "react";
 import {
   Alert,
+  Platform,
   Pressable,
   StyleSheet,
   Text,
@@ -25,15 +26,20 @@ export function SessionGroup({
   const [connecting, setConnecting] = useState(false);
 
   useEffect(() => {
-    if (credentials.host) {
-      setHostInput(credentials.host);
+    if (credentials.syncURL) {
+      setHostInput(credentials.syncURL.split("/api/v1/")[0]);
     }
   }, [credentials]);
 
   const connect = async () => {
     setConnecting(true);
     try {
-      OpenWearablesHealthSDK.configure(hostInput);
+      OpenWearablesHealthSDK.configure({
+        sync: `${hostInput}/api/v1/sdk/users/{user_id}/sync`,
+        logs: `${hostInput}/api/v1/sdk/users/{user_id}/logs`,
+        tokenRefresh: `${hostInput}/api/v1/token/refresh`,
+        disconnect: `${hostInput}/api/v1/users/{user_id}/connections/${Platform.OS === "ios" ? "apple" : "{provider}"}`,
+      });
 
       const response = await fetch(
         `${hostInput}/api/v1/invitation-code/redeem`,
