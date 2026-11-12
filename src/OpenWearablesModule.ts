@@ -38,6 +38,15 @@ declare class OpenWearablesModule extends NativeModule<OpenWearablesModuleEvents
   resetAnchors(): void;
   getStoredCredentials(): Record<string, any | null>;
 
+  // MARK: - Per-type sync
+  /** Stops syncing these types and keeps what was already sent. Survives restarts; cleared on sign-out. */
+  pauseTypes(types: HealthDataType[]): Promise<void>;
+  /** Syncs these types again from where they stopped, or reads their whole history when that's no longer possible. */
+  resumeTypes(types: HealthDataType[]): Promise<void>;
+  getPausedTypes(): HealthDataType[];
+  /** Reads these types' whole history again and uploads it. Resolves once scheduled, not when finished. */
+  resyncTypes(types: HealthDataType[]): Promise<void>;
+
   // MARK: - Providers
   getAvailableProviders(): HealthDataProvider[];
   setProvider(providerId: string): boolean;

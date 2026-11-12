@@ -121,6 +121,27 @@ public class OpenWearablesModule: Module {
             return OpenWearablesHealthSDK.shared.getStoredCredentials()
         }
 
+        // MARK: - Per-type sync
+        AsyncFunction("pauseTypes") { (types: [String], promise: Promise) in
+            OpenWearablesHealthSDK.shared.pauseTypes(types: types)
+            promise.resolve()
+        }
+
+        AsyncFunction("resumeTypes") { (types: [String], promise: Promise) in
+            OpenWearablesHealthSDK.shared.resumeTypes(types: types)
+            promise.resolve()
+        }
+
+        Function("getPausedTypes") {
+            return OpenWearablesHealthSDK.shared.getPausedTypes()
+        }
+
+        AsyncFunction("resyncTypes") { (types: [String], promise: Promise) in
+            OpenWearablesHealthSDK.shared.resyncTypes(types: types) {
+                promise.resolve()
+            }
+        }
+
         // MARK: - Providers (not implemented in iOS SDK)        
         Function("getAvailableProviders") { return [] }
         
