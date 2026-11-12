@@ -142,6 +142,23 @@ public class OpenWearablesModule : Module() {
       OpenWearablesHealthSDK.getInstance().getStoredCredentials()
     }
 
+    // MARK: - Per-type sync
+    AsyncFunction("pauseTypes") { types: List<String> ->
+      OpenWearablesHealthSDK.getInstance().pauseTypes(types)
+    }
+
+    AsyncFunction("resumeTypes") { types: List<String> ->
+      OpenWearablesHealthSDK.getInstance().resumeTypes(types)
+    }
+
+    Function("getPausedTypes") {
+      OpenWearablesHealthSDK.getInstance().getPausedTypes()
+    }
+
+    AsyncFunction("resyncTypes") Coroutine { types: List<String> ->
+      OpenWearablesHealthSDK.getInstance().resyncTypes(types)
+    }
+
     // MARK: - Providers
     Function("getAvailableProviders") {
       OpenWearablesHealthSDK.getInstance().getAvailableProviders()
